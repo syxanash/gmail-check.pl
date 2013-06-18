@@ -46,11 +46,11 @@ here's an example of how you should write your XML configuration file
 
 ##Installation
 
-This script requires the tools **notify-osd** and **zenity**, which can be
+This script requires the tools **notify-osd**, **zenity** and **mpg123** which can be
 easily installed (if you're on a Debian-like distro), by the following command:
 
 ```sh
-apt-get install zenity
+apt-get install zenity mpg123
 ```
 
 otherwise if you're using a different distro, these tools will probably

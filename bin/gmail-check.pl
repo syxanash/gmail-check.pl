@@ -10,7 +10,7 @@ use Getopt::Long;
 use version;
 use Term::ReadKey;
 
-our $VERSION = qv('0.0.1');
+our $VERSION = qv('0.0.2');
 
 my %actions = (
     cli     => q{},
@@ -18,8 +18,17 @@ my %actions = (
     read    => q{},
 );
 
-my $icon_path       = '/usr/share/icons/gmail-check.png';
-my $error_icon_path = '/usr/share/icons/gmail-check-error.png';
+######## configuration files ########
+
+my $local_dir = '/usr/local/gcheck/';
+
+my $icon_path       = $local_dir . 'icons/gmail-check.png';
+my $error_icon_path = $local_dir . 'icons/gmail-check-error.png';
+
+my $sounds_path       = $local_dir . 'sounds/found.mp3';
+my $error_sounds_path = $local_dir . 'sounds/error.mp3';
+
+#####################################
 
 my $gmail_username = q{};
 my $gmail_password = q{};
@@ -78,17 +87,23 @@ if ( $actions{read} ) {
     foreach my $i ( @{ $data->{account} } ) {
         $email_num = get_email_num( $i->{username}, $i->{password} );
 
-        ($email_num)
-          ? system 'notify-send -u normal -i '
+        if ($email_num) {
+          system 'notify-send -u normal -i '
           . $icon_path
           . " 'Gmail' 'mails found for "
           . $i->{username}
-          . ": $email_num'"
-          
-          : system 'notify-send -u critical -i '
+          . ": $email_num'";
+
+          system("mpg123 $sounds_path")
+        }
+        else {
+          system 'notify-send -u critical -i '
           . $error_icon_path
           . " 'Gmail Error' 'cannot find any email for "
           . $i->{username} . "'";
+
+          system("mpg123 $error_sounds_path")
+        }
     }
 
     exit;
@@ -158,6 +173,8 @@ sub check_env_path {
     my %binaries = (
         notify => 'notify-send',
         zenity => 'zenity',
+        mpg123 => 'mpg123',
+
     );
 
     foreach my $path ( split /:/, $ENV{"PATH"} ) {
