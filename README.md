@@ -23,25 +23,27 @@ and get the number of messages. CLI way instead, do not need zenity or
 notify-osd and runs the program directly from the command line. The
 third way --read, allows you to check the mail box automatically simply
 by specifing the path where the configuration file is located. The
-configuration file is an XML file and should contain the username and
+configuration file is an JSON file and should contain the username and
 the password of you GMail account.
 
-##XML configuration
+##JSON configuration
 
-here's an example of how you should write your XML configuration file
+here's an example of how you should write your JSON configuration file
 
-```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<accounts>
-    <account>
-        <username>chandler_bing</username>
-        <password>SongvEtel188</password>
-    </account>
-    <account>
-        <username>ross.geller</username>
-        <password>PaintEusebE113</password>
-    </account>
-</accounts>
+```json
+{
+    "accounts":
+    [
+        {
+            "username": "chandler_bing",
+            "password": "SongvEtel188"
+        },
+        {
+            "username": "ross.geller",
+            "password": "PaintEusebE113"
+        }
+    ]
+}
 ```
 
 ##Installation
@@ -60,7 +62,9 @@ You also need various Perl modules to make this script work, here's the list:
 
 * [LWP::UserAgent](http://search.cpan.org/~gaas/libwww-perl-6.04/lib/LWP/UserAgent.pm) -- (already installed)
 * [XML::Simple](http://search.cpan.org/~grantm/XML-Simple-2.20/lib/XML/Simple.pm) -- (probably installation required)
+* [JSON](http://search.cpan.org/~makamaka/JSON-2.59/lib/JSON.pm) -- (installation required)
 * [Getopt::Long](http://search.cpan.org/~enrys/POD2-IT-Getopt-Long/lib/POD2/IT/Getopt/Long.pm) -- (probably installation required)
+* [File::Slurp](http://search.cpan.org/~uri/File-Slurp-9999.19/lib/File/Slurp.pm) -- (installation required)
 * [Pod::Usage](http://perldoc.perl.org/Pod/Usage.html) -- (already installed)
 * [version](http://search.cpan.org/~jpeacock/version-0.99/lib/version.pod) -- (already installed)
 * [Data::Dumper](http://search.cpan.org/~smueller/Data-Dumper-2.139/Dumper.pm) -- (don't remember, probably installation required)
@@ -75,7 +79,13 @@ and the script gmail-check.pl, contained into this package, will be automaticall
 
 ##Screenshot
 
-![gmail-check.pl screenshot](http://i.imgur.com/Pb10fz9.png "gmail-check.pl screenshot")
+Some of the notification status:
+
+![gmail-check.pl screenshot](http://i.imgur.com/v3EbTLC.png "gmail-check.pl screenshot")
+
+Zenity input example:
+
+![gmail-check.pl screenshot](http://i.imgur.com/TtsLD3p.png "Zenity input example")
 
 ##License
 ### gmail-check.pl is released under the DWTFYWT:

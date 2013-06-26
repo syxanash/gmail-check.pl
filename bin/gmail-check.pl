@@ -5,12 +5,14 @@ use warnings;
 
 use LWP::UserAgent;
 use XML::Simple;
+use JSON;
+use File::Slurp;
 use Pod::Usage;
 use Getopt::Long;
 use version;
 use Term::ReadKey;
 
-our $VERSION = qv('0.0.2');
+our $VERSION = qv('0.1.0');
 
 my %actions = (
     cli     => q{},
@@ -20,10 +22,14 @@ my %actions = (
 
 ######## configuration files ########
 
+my $temporary_folder = '/tmp/gcheck/';
 my $local_dir = '/usr/local/gcheck/';
+
+my $check_running_file = $temporary_folder . 'runing.log';
 
 my $icon_path       = $local_dir . 'icons/gmail-check.png';
 my $error_icon_path = $local_dir . 'icons/gmail-check-error.png';
+my $warning_icon_path = $local_dir . 'icons/gmail-check-warning.png';
 
 my $sounds_path       = $local_dir . 'sounds/found.mp3';
 my $error_sounds_path = $local_dir . 'sounds/error.mp3';
@@ -69,6 +75,11 @@ if ( $actions{cli} ) {
     exit;
 }
 
+# create a temporary folder in /tmp
+
+mkdir $temporary_folder
+  unless ( -d $temporary_folder );
+
 # check if all the tools have been installed on the system
 
 if ( $ENV{"PATH"} ne q{} ) {
@@ -78,13 +89,40 @@ if ( $ENV{"PATH"} ne q{} ) {
 }
 
 # check all the accounts saved into the
-# configuration file config.xml
+# configuration file
 
 if ( $actions{read} ) {
 
-    my $data = XMLin( $actions{read} );
+    # check if the script is already running
 
-    foreach my $i ( @{ $data->{account} } ) {
+    if ( -e $check_running_file ) {
+      system 'notify-send -u normal -i '
+          . $warning_icon_path
+          . " 'Gmail Warning' '$0 is already running!'";
+
+      die "[!] $0 currently running!\n";
+    }
+
+    my $encoded_content = read_file($actions{read});
+    my $decoded_content = decode_json($encoded_content);
+    my @accounts = @{ $decoded_content->{'accounts'} };
+
+    die "[!] No account found in your configuration file!\n"
+      unless( $#accounts+1 > 0 );
+
+    #####################################################
+    # create a file which will be used to check if the  #
+    # script is running.                                #
+                                                        #
+    open my $filehandle, '>', $check_running_file       #
+      or die "[!] Can't open the file handle: $!\n";    #
+                                                        #
+    print {$filehandle} q{};                            #
+                                                        #
+    close $filehandle;                                  #
+    #####################################################
+
+    foreach my $i ( @accounts ) {
         $email_num = get_email_num( $i->{username}, $i->{password} );
 
         if ($email_num) {
@@ -104,6 +142,20 @@ if ( $actions{read} ) {
 
           system("mpg123 $error_sounds_path")
         }
+    }
+
+    # delete the check running file once the script
+    # has finished to fetch the email
+
+    if ( -e $check_running_file ) {
+        unlink($check_running_file);
+    }
+    else {
+        print '[?] Check running file wasn\'t found...', "\n";
+
+        system 'notify-send -u normal -i '
+          . $warning_icon_path
+          . " 'Check running file was not found...'";
     }
 
     exit;
@@ -219,7 +271,7 @@ zenity or notify-osd and runs the program directly
 from the command line. The third way --read, allows you to
 check the mail box automatically simply by specifing
 the path where the configuration file is located.
-The configuration file is an XML file and should contain
+The configuration file is an JSON file and should contain
 the username and the password of you GMail account.
 
 =head1 DEPENDENCIES
@@ -228,7 +280,11 @@ LWP::UserAgent ~ http://search.cpan.org/~gaas/libwww-perl-6.04/lib/LWP/UserAgent
 
 XML::Simple ~ http://search.cpan.org/~grantm/XML-Simple-2.20/lib/XML/Simple.pm
 
+JSON ~ http://search.cpan.org/~makamaka/JSON-2.59/lib/JSON.pm
+
 Getopt::Long ~ http://search.cpan.org/~enrys/POD2-IT-Getopt-Long/lib/POD2/IT/Getopt/Long.pm
+
+File::Slurp ~ http://search.cpan.org/~uri/File-Slurp-9999.19/lib/File/Slurp.pm
 
 version ~ http://search.cpan.org/~jpeacock/version-0.99/lib/version.pod
 
