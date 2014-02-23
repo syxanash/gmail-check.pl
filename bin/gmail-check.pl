@@ -126,7 +126,7 @@ if ( $actions{read} ) {
         $email_num = get_email_num( $i->{username}, $i->{password} );
 
         if ($email_num) {
-          system 'notify-send -u normal -i '
+          system 'notify-send -u critical -i '
           . $icon_path
           . " 'Gmail' 'mails found for "
           . $i->{username}
@@ -135,7 +135,7 @@ if ( $actions{read} ) {
           system("mpg123 $sounds_path")
         }
         else {
-          system 'notify-send -u critical -i '
+          system 'notify-send -u normal -i '
           . $error_icon_path
           . " 'Gmail Error' 'cannot find any email for "
           . $i->{username} . "'";
@@ -153,7 +153,7 @@ if ( $actions{read} ) {
     else {
         print '[?] Check running file wasn\'t found...', "\n";
 
-        system 'notify-send -u normal -i '
+        system 'notify-send -u critical -i '
           . $warning_icon_path
           . " 'Check running file was not found...'";
     }
