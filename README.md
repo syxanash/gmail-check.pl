@@ -1,9 +1,9 @@
-##gmail-check.pl
+## gmail-check.pl
 ### Yet another GMail check script
 
 **gmail-check.pl** is my own private script which checks my GMail box.
 
-##Synopsis
+## Synopsis
 
 ```
 perl gmail-check.pl [--options] <parameters>
@@ -15,7 +15,7 @@ General Options:
   --help                Show this very useful help of course!
 ```
 
-##Description
+## Description
 
 This script allows you to check your Gmail box. You have three ways to
 run the script, default way is by using zenity to compile the fields
@@ -26,7 +26,7 @@ by specifing the path where the configuration file is located. The
 configuration file is an JSON file and should contain the username and
 the password of you GMail account.
 
-##JSON configuration
+## JSON configuration
 
 here's an example of how you should write your JSON configuration file
 
@@ -46,7 +46,7 @@ here's an example of how you should write your JSON configuration file
 }
 ```
 
-##Installation
+## Installation
 
 This script requires the tools **notify-osd**, **zenity** and **mpg123** which can be
 easily installed (if you're on a Debian-like distro), by the following command:
@@ -77,7 +77,7 @@ make install
 
 and the script gmail-check.pl, contained into this package, will be automatically copied into /usr/bin/
 
-##Screenshot
+## Screenshot
 
 Some of the notification status:
 
@@ -87,7 +87,7 @@ Zenity input example:
 
 ![gmail-check.pl screenshot](http://i.imgur.com/TtsLD3p.png "Zenity input example")
 
-##License
+## License
 ### gmail-check.pl is released under the DWTFYWT:
 
 ```
@@ -103,6 +103,6 @@ Zenity input example:
   0. Do what you want cause a pirate is FREE.
 ```
 
-##About
+## About
 
 This script was developed by Simone 'syxanash', if you have any kind of suggestions, criticisms, or bug fixes please let me know in some ways :-)
