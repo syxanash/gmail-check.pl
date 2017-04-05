@@ -68,6 +68,7 @@ You also need various Perl modules to make this script work, here's the list:
 * [Pod::Usage](http://perldoc.perl.org/Pod/Usage.html) -- (already installed)
 * [version](http://search.cpan.org/~jpeacock/version-0.99/lib/version.pod) -- (already installed)
 * [Data::Dumper](http://search.cpan.org/~smueller/Data-Dumper-2.139/Dumper.pm) -- (don't remember, probably installation required)
+* [Mozilla::CA](http://search.cpan.org/~abh/Mozilla-CA-20160104/lib/Mozilla/CA.pm) -- (installation required)
 
 After installing all the required libraries, type the command:
 
@@ -86,22 +87,6 @@ Some of the notification status:
 Zenity input example:
 
 ![gmail-check.pl screenshot](http://i.imgur.com/TtsLD3p.png "Zenity input example")
-
-## License
-### gmail-check.pl is released under the DWTFYWT:
-
-```
-            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
- 
- Everyone is permitted to copy and distribute verbatim or modified
- copies of this license document, and changing it is allowed as long
- as the name is changed.
- 
-            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
-
-  0. Do what you want cause a pirate is FREE.
-```
 
 ## About
 

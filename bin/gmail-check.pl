@@ -290,6 +290,8 @@ version ~ http://search.cpan.org/~jpeacock/version-0.99/lib/version.pod
 
 Pod::Usage ~ http://perldoc.perl.org/Pod/Usage.html
 
+Mozilla::CA ~ http://search.cpan.org/~abh/Mozilla-CA-20160104/lib/Mozilla/CA.pm
+
 =head1 SEE ALSO
 
 Zenity manual at http://library.gnome.org/users/zenity/stable/
@@ -299,11 +301,11 @@ Getopt::Long and Pod::Usage http://perldoc.perl.org/Getopt/Long.html#Documentati
 =head1 LICENSE AND COPYRIGHT
 
             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
- 
+
  Everyone is permitted to copy and distribute verbatim or modified
  copies of this license document, and changing it is allowed as long
  as the name is changed.
- 
+
             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
