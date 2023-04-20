@@ -82,11 +82,11 @@ and the script gmail-check.pl, contained into this package, will be automaticall
 
 Some of the notification status:
 
-![gmail-check.pl screenshot](http://i.imgur.com/v3EbTLC.png "gmail-check.pl screenshot")
+![gmail-check.pl screenshot](https://i.imgur.com/eLNdo05.png "gmail-check.pl screenshot")
 
 Zenity input example:
 
-![gmail-check.pl screenshot](http://i.imgur.com/TtsLD3p.png "Zenity input example")
+![gmail-check.pl screenshot](https://i.imgur.com/EFhizIq.png "Zenity input example")
 
 ## About
 
